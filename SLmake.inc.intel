@@ -1,0 +1,15 @@
+F77=mpif90 -fc=ifort
+F77FLAGS=-O3 -qopenmp -mavx
+
+F77LOADER=mpif90 -fc=ifort
+F77LOADFLAGS=-O3 -qopenmp -mavx
+
+ARCH      = ar
+ARCHFLAGS = cr
+RANLIB    = ranlib
+
+MKLROOT=/opt/intel/compilers_and_libraries_2017.4.196/linux/mkl
+
+BLASLIB=$(MKLROOT)/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group $(MKLROOT)/lib/intel64/libmkl_intel_lp64.a $(MKLROOT)/lib/intel64/libmkl_core.a \
+        $(MKLROOT)/lib/intel64/libmkl_sequential.a $(MKLROOT)/lib/intel64/libmkl_blacs_intelmpi_lp64.a -Wl,--end-group -lpthread -lm -lgfortran
+
